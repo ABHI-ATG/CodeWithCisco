@@ -10,6 +10,7 @@ public class Data {
     int number;
     int edges;
     int[] res=new int[1001];
+    Set<Integer> st=new TreeSet();
 
     static Data d;
 
@@ -34,7 +35,6 @@ public class Data {
     public int read(){
         arr=new ArrayList<>();
         int num=0;
-        Set<Integer> st=new HashSet();
         try {
             Scanner read=new Scanner(new File("input.txt"));
             for(int i=0;i<this.number;i++){
@@ -122,7 +122,6 @@ public class Data {
             for(int it:res){
                 s+=it+" ";
             }
-            System.out.println(s);
             bw.write(s+"\n");
             bw.close();
         } catch (Exception e) {
@@ -171,5 +170,35 @@ public class Data {
         for(int ele:a){
             res[ele]=0;
         }
+    }
+
+    public void addEdge(){
+        Scanner sc=new Scanner(System.in);
+        int a,b,dis;
+        System.out.println("Enter Nodes a and b : ");
+        a=sc.nextInt();
+        b=sc.nextInt();
+        for(Pair ele:arr.get(a)){
+            if(ele.b==b){
+                System.out.println("Edge already exist");
+                return;
+            }
+        }
+        System.out.println("Enter distance ");
+        dis=sc.nextInt();
+        arr.get(a).add(new Pair(b,dis));
+        arr.get(b).add(new Pair(a,dis));
+        st.add(a);st.add(b);
+        number=((TreeSet<Integer>)st).last();
+        edges++;
+        try {
+            BufferedWriter bw=new BufferedWriter(new FileWriter("input.txt",true));
+            bw.append(a+" "+b+" "+dis+"\n");          
+            bw.close();  
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        sc.close();
+        System.out.println("Edge added Successfully");
     }
 }

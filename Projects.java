@@ -38,6 +38,7 @@ public class Projects {
             System.out.println("Enter 7 to elect master node in the network : ");
             System.out.println("Enter 8 to restrict some nodes from path : ");
             System.out.println("Enter 9 to stop communication for some time : ");
+            System.out.println("Enter 10 to add more edges : ");
             int n=sc.nextInt();
             if(n==1){
                 System.out.println("Enter two nodes : ");
@@ -100,6 +101,8 @@ public class Projects {
 
             }else if(n==9){
                 TimeUnit.SECONDS.sleep(5);
+            }else if(n==10){
+                d.addEdge();
             }
             else break;
         }
